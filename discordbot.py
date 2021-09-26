@@ -1,10 +1,11 @@
 from discord.ext import commands
 import discord
-import time
-import re
+
 
 from os import getenv
+import time
 import traceback
+import re
 
 
 intents = discord.Intents.default()
@@ -122,13 +123,6 @@ async def on_message(message):
     except:
         pass
 
-
-
-@bot.event
-async def on_ready():
-    print('{0.user}がログインしました'.format(bot))
-    count = len(bot.guilds)
-    await bot.change_presence(activity=discord.Game(name=";;help", type=1))
 
 
 token = getenv('DISCORD_BOT_TOKEN')
