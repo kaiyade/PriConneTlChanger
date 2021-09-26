@@ -7,8 +7,11 @@ from os import getenv
 import traceback
 
 
+intents = discord.Intents.default()
+intents.members = True
 
-bot = commands.Bot(command_prefix='/')
+
+bot = commands.Bot(command_prefix='/', intents=intents)
 
 
 @bot.event
@@ -96,8 +99,33 @@ async def on_message(message):
                 math = await message.channel.send(eval(temp))
             except:
                 pass
+        elif str(message.content)[0:16] == "deploymentserver":
+            try:
+                guildlist = ""
+                for item in bot.guilds:
+                    guildlist = str(guildlist) + str(item) + ", " 
+
+                await message.channel.send("サーバー数: "+ str(len(bot.guilds))+ "\n" + "一覧: " + str(guildlist))
+            except:
+                pass
+
+         elif str(message.content)[0:6] == ";;help":
+            try:
+                await message.channel.send("```tl <秒数> - TLを変換\n" + "= <計算式> - 計算```")
+                
+            except:
+                pass
+        
     except:
         pass
+
+
+
+@bot.event
+async def on_ready():
+    print('{0.user}がログインしました'.format(bot))
+    count = len(bot.guilds)
+    await bot.change_presence(activity=discord.Game(name=";;help", type=1))
     
 
     
