@@ -42,6 +42,7 @@ async def on_message(message):
                             linesplit = tlline.split(":")
                             lpt = 0
                             for i in range(len(linesplit)-1):
+                                up2 = str(linesplit[lpt])[-2]
                                 up = str(linesplit[lpt])[-1]
                                 down = str(linesplit[lpt+1])[0:2]
     
@@ -68,7 +69,13 @@ async def on_message(message):
 
                                 down = "{0:02}".format(int(down))
 
-                                linesplit[lpt] = linesplit[lpt][:-1] + str(up)
+                                try:
+                                    if int(up2) == 0:
+                                        up2 = ""
+                                except:
+                                    pass
+
+                                linesplit[lpt] = linesplit[lpt][:-2] + str(up)
                                 linesplit[lpt+1] = str(down) + linesplit[lpt+1][2:]
 
                                 lpt+=1
