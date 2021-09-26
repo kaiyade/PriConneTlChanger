@@ -123,6 +123,10 @@ async def on_message(message):
     except:
         pass
 
+@bot.event
+async def on_ready():
+    count = len(bot.guilds)
+    await bot.change_presence(activity=discord.Game(name=";;help", type=1))
 
 
 token = getenv('DISCORD_BOT_TOKEN')
