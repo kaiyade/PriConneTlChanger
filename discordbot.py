@@ -11,11 +11,7 @@ import re
 intents = discord.Intents.default()
 intents.members = True
 
-
 bot = commands.Bot(command_prefix='/', intents=intents)
-
-
-
 
 scoremathuser = []
 d = 0
@@ -233,11 +229,16 @@ async def on_message(message):
     except:
         pass
 
+
+        
+
+
+
+
 @bot.event
 async def on_ready():
     count = len(bot.guilds)
     await bot.change_presence(activity=discord.Game(name=";;help", type=1))
-
 
 token = getenv('DISCORD_BOT_TOKEN')
 bot.run(token)
