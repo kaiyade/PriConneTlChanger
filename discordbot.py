@@ -7,7 +7,7 @@ import time
 import traceback
 import re
 
-
+#white by kaiyade
 intents = discord.Intents.default()
 intents.members = True
 
