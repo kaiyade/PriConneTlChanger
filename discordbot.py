@@ -120,6 +120,9 @@ async def on_message(message):
                     await message.channel.send(score)
 
                 elif "m" in message.content:
+                    if "-" in message.content:
+                        await message.channel.send("正の整数を入力してください")
+                        return
                     if "s" not in message.content:
                         spl = message.content[3:].split()
                         ans = ((int(spl[1]) - int(spl[0])) / int(spl[1])) * 90 + 20
@@ -132,21 +135,29 @@ async def on_message(message):
 
                         if ans > 90:
                            ans = 90
-                        await message.channel.send(str(ans) + " 秒の持ち越しが可能です")
+
+
+                        if ans < 21:
+                            await message.channel.send("持ち越し不可能です")
+                        else:
+                            await message.channel.send(str(ans) + " 秒の持ち越しが可能です")
 
                     else:
                         spl = message.content[3:].split()
+                        if int(spl[1][:2]) <= 90 and int(spl[1][:2]) > 20:
 
-                        ans = int(spl[0]) / (1 - (((int(spl[1][:2])- 0.99999999) - 20) / 90))
+                            ans = int(spl[0]) / (1 - (((int(spl[1][:2])- 0.99999999) - 20) / 90))
 
 
-                        if "." in str(ans):
-                            anssp = str(ans).split(".")
-                            ans = int(anssp[0])
-                            if int(anssp[1]) != 0:
-                                ans += 1
+                            if "." in str(ans):
+                                anssp = str(ans).split(".")
+                                ans = int(anssp[0])
+                                if int(anssp[1]) != 0:
+                                    ans += 1
 
-                        await message.channel.send(str(spl[1][:2]) + " 秒持ち越すための最低ダメージは " + str(ans) + " です")
+                            await message.channel.send(str(spl[1][:2]) + " 秒持ち越すための最低ダメージは " + str(ans) + " です")
+                        else:
+                            await message.channel.send("持ち越し時間は21～90の間で指定してください")
 
                 else:
                     temp = message.content[1:].replace('×', '*')
