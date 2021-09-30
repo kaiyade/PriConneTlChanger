@@ -144,7 +144,7 @@ async def on_message(message):
                             if int(anssp[1]) != 0:
                                 ans += 1
 
-                        await message.channel.send(str(spl[1]) + " 秒持ち越すための最低ダメージは " + str(ans) + " です")
+                        await message.channel.send(str(spl[1][:2]) + " 秒持ち越すための最低ダメージは " + str(ans) + " です")
 
                 else:
                     temp = message.content[1:].replace('×', '*')
