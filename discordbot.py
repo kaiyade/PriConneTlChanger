@@ -130,7 +130,7 @@ async def on_message(message):
 
                         if ans > 90:
                            ans = 90
-                        await message.channel.send(ans)
+                        await message.channel.send(str(ans) + " 秒の持ち越しが可能です")
 
                     else:
                         spl = message.content[3:].split()
@@ -144,7 +144,7 @@ async def on_message(message):
                             if int(anssp[1]) != 0:
                                 ans += 1
 
-                        await message.channel.send(ans)
+                        await message.channel.send(str(spl[1]) + " 秒持ち越すための最低ダメージは " + str(ans) + " です")
 
                 else:
                     temp = message.content[1:].replace('×', '*')
