@@ -120,7 +120,6 @@ async def on_message(message):
                 elif "m" in message.content:
                     if "s" not in message.content:
                         spl = message.content[3:].split()
-                        await message.channel.send(spl)
                         ans = ((int(spl[1]) - int(spl[0])) / int(spl[1])) * 90 + 20
 
                         if "." in str(ans):
