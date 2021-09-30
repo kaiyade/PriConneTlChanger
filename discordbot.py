@@ -114,7 +114,8 @@ async def on_message(message):
                 elif "sc" in message.content:
                     spl = message.content[4:].split()
                     d = await scoremag(int(spl[0]), int(spl[1]))
-                    score = float(d) * int(spl[2])
+                    score = spl[2].replace(",", "")
+                    score = float(d) * int(score)
                     score = '{:,}'.format(int(score))
                     await message.channel.send(score)
 
