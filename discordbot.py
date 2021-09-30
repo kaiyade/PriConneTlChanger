@@ -135,11 +135,9 @@ async def on_message(message):
 
                     else:
                         spl = message.content[3:].split()
-                        await message.channel.send(spl)
 
                         ans = int(spl[0]) / (1 - (((int(spl[1][:2])- 0.99999999) - 20) / 90))
 
-                        await message.channel.send(ans)
 
                         if "." in str(ans):
                             anssp = str(ans).split(".")
