@@ -250,7 +250,7 @@ async def on_message(message):
             data.append(str(message.guild.id) + " " + str(ch.id))
             await datamsg.edit(content=data)
 
-        else:
+        if str(message.guild.id) in str(data):
             for item in data:
                 if str(message.guild.id) in str(item):
                     item = item.split()
