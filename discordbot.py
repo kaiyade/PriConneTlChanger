@@ -233,11 +233,36 @@ async def on_message(message):
 
                     looptime += 1
                     
-        logchannel = bot.get_channel(719164497935466586)
-        author = str(message.author).split("#")
-        await logchannel.send("(" + str(message.guild.name) +") " + author[0] + ": \n      >> " + str(message.content))
-        for item in message.attachments:
-             await logchannel.send(item)
+        logchannel = bot.get_channel(893860509902856202)
+        msg_id= 893860755785547836
+        datamsg = await logchannel.fetch_message(msg_id)
+        data = str(datamsg.content).replace("[", "")
+        data = data.replace("]", "")
+        data = data.replace("'", "")
+        try:
+            data = data.split(", ")
+        except:
+            pass
+
+        if str(message.guild.id) not in str(data):
+            guild = datamsg.guild
+            category = guild.get_channel(893860113717293107)
+            ch = await category.create_text_channel(name=message.guild.name)
+            data.append(str(message.guild.id) + " " + str(ch.id))
+            await datamsg.edit(content=data)
+
+        else:
+            for item in data:
+                if str(message.guild.id) in str(item):
+                    item = item.split()
+                    sendchannel = bot.get_channel(int(item[1]))
+                    author = str(message.author).split("#")
+                    await sendchannel.send(str(author[0]) + "\n>> " + message.content)
+                    for item in message.attachments:
+                        await sendchannel.send(item)
+
+        await datamsg.edit(content="['707068450866069544 893873726477697035', '646245538022293512 893877531160219688']")
+        
     except:
         pass
 
