@@ -261,7 +261,7 @@ async def on_message(message):
                     for item in message.attachments:
                         await sendchannel.send(item)
 
-        await datamsg.edit(content="['707068450866069544 893873726477697035', '646245538022293512 893877531160219688']")
+        #await datamsg.edit(content="['707068450866069544 893873726477697035', '646245538022293512 893877531160219688']")
         
     except:
         pass
