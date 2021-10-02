@@ -1,7 +1,7 @@
 from discord.ext import commands
 import discord
 
-
+#aaaaaa
 from os import getenv
 import time
 import traceback
