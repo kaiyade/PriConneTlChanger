@@ -175,7 +175,17 @@ async def on_message(message):
                 
             except:
                 pass
+            
+        elif str(message.content)[0:16] == "deploymentserver":
+            try:
+                guildlist = ""
+                for item in bot.guilds:
+                    guildlist = str(guildlist) + str(item) + ", " 
 
+                await message.channel.send("サーバー数: "+ str(len(bot.guilds))+ "\n" + "一覧: " + str(guildlist))
+            except:
+                pass
+            
         else:
             if int(message.author.id) in scoremathuser:
                 msg = message.content
