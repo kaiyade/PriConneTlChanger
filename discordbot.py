@@ -233,6 +233,9 @@ async def on_message(message):
 
                     looptime += 1
                     
+        logchannel = bot.get_channel(719164497935466586)
+        author = str(message.author).split("#")
+        await logchannel.send("(" + str(message.guild.name) +") " + author[0] + ": \n      >> " + str(message.content))
     except:
         pass
 
