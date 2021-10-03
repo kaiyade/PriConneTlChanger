@@ -6,6 +6,8 @@ import time
 import traceback
 import re
 
+
+name = ""
 #white by kaiyade
 intents = discord.Intents.default()
 intents.members = True
@@ -256,7 +258,15 @@ async def on_message(message):
                     item = item.split()
                     sendchannel = bot.get_channel(int(item[1]))
                     author = str(message.author).split("#")
-                    await sendchannel.send(str(author[0]) + "\n>> " + message.content)
+                    try:
+                        global name
+                        if str(name) == str(message.author):
+                            await sendchannel.send(message.content)
+                        else:
+                            await sendchannel.send(str(author[0]) + "\n>> " + message.content)
+                    except:
+                        pass
+                    name = str(message.author)
                     for item in message.attachments:
                         await sendchannel.send(item)
 
