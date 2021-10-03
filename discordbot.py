@@ -261,7 +261,7 @@ async def on_message(message):
                     try:
                         global name
                         if str(name) == str(message.author):
-                            await sendchannel.send(message.content)
+                            await sendchannel.send("\n>> " + message.content)
                         else:
                             await sendchannel.send(str(author[0]) + "\n>> " + message.content)
                     except:
