@@ -92,7 +92,8 @@ async def on_message(message):
                     endtl = '\n'.join(tlsplit)
                     endtl = await message.channel.send("```" + "持ち越し" + tltime + "秒\n\n" + endtl + "```")
 
-            
+                    await endtl.add_reaction("📩")
+                    
                 else:
                     sentmsg = await message.channel.send("エラー: 持ち越し時間")
                     await message.delete(delay = 5)
@@ -274,6 +275,15 @@ async def on_message(message):
         
     except:
         pass
+
+@bot.event
+async def on_reaction_add(reaction , user ):
+    if user.bot:
+        return
+    if reaction.emoji == ("📩"):
+        if ":" in reaction.message.content and reaction.message.author.bot:
+            channel = await user.create_dm()
+            await channel.send(reaction.message.content)
 
 
 
