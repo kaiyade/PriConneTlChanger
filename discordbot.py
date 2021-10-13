@@ -7,7 +7,6 @@ import traceback
 import re
 
 
-name = ""
 #white by kaiyade
 intents = discord.Intents.default()
 intents.members = True
