@@ -44,7 +44,10 @@ async def on_message(message):
                             for i in range(len(linesplit) - 1):
                                 up = str(linesplit[lpt])[-1]
                                 down = str(linesplit[lpt + 1])[0:2]
-    
+                                try:
+                                    up2 = str(linesplit[lpt])[-2]
+                                except:
+                                    up2 = ""
                             
                                 tmath = 0
 
@@ -61,14 +64,19 @@ async def on_message(message):
 
                                 if len(str(up)) == 2:
                                     up = str(up)[1:]
-
+                    
    
                                 down = tmath % 60
-
+                                
+                                try:
+                                    if int(up2) == 0:
+                                        up2 = ""
+                                except:
+                                    pass
 
                                 down = "{0:02}".format(int(down))
 
-                                linesplit[lpt] = linesplit[lpt][:-2] + str(up)
+                                linesplit[lpt] = linesplit[lpt][:-2] + str(up2) + str(up)
                                 linesplit[lpt + 1] = str(down) + linesplit[lpt + 1][2:]
 
                                 lpt+=1
