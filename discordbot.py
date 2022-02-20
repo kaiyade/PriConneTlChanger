@@ -32,7 +32,7 @@ async def on_message(message):
             
             try:
                 tltime = re.sub(r"\D", "", tlsp1)
-                if int(tltime) >= 21 and int(tltime) <= 89:
+                if int(tltime) >= 21 and int(tltime) <= 90:
                     del tlsplit[0]
                     lp = 0
                     minus = False
