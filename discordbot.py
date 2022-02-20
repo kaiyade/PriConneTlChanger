@@ -85,7 +85,7 @@ async def on_message(message):
                         for i in range(len(tlsplit) - delist):
                             del tlsplit[len(tlsplit) - 1]
                     endtl = '\n'.join(tlsplit)
-                    if tltime != 90:
+                    if int(tltime) != 90:
                         endtl = await message.channel.send("```" + "持ち越し" + tltime + "秒\n\n" + endtl + "```")
                     else:
                         endtl = await message.channel.send("```" + endtl + "```")
