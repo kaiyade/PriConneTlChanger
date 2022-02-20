@@ -1,3 +1,4 @@
+
 from discord.ext import commands
 import discord
 
@@ -6,8 +7,7 @@ import time
 import traceback
 import re
 
-
-#white by kaiyade
+# white by kaiyade
 intents = discord.Intents.default()
 intents.members = True
 
@@ -28,8 +28,7 @@ async def on_message(message):
             tlsplit = tlmsg.split("\n")
 
             tlsp1 = tlsplit[0]
-            
-            
+
             try:
                 tltime = re.sub(r"\D", "", tlsp1)
                 if int(tltime) >= 21 and int(tltime) <= 90:
@@ -48,7 +47,7 @@ async def on_message(message):
                                     up2 = str(linesplit[lpt])[-2]
                                 except:
                                     up2 = ""
-                            
+
                                 tmath = 0
 
                                 tmath = int(up) * 60 + int(down)
@@ -64,10 +63,9 @@ async def on_message(message):
 
                                 if len(str(up)) == 2:
                                     up = str(up)[1:]
-                    
-   
+
                                 down = tmath % 60
-                                
+
                                 try:
                                     if int(up2) == 0:
                                         up2 = ""
@@ -79,29 +77,29 @@ async def on_message(message):
                                 linesplit[lpt] = linesplit[lpt][:-2] + str(up2) + str(up)
                                 linesplit[lpt + 1] = str(down) + linesplit[lpt + 1][2:]
 
-                                lpt+=1
-
-                            
-
+                                lpt += 1
 
                             tlsplit[lp] = ':'.join(linesplit)
-                        lp+=1 
+                        lp += 1
                     if delist != 0:
                         for i in range(len(tlsplit) - delist):
                             del tlsplit[len(tlsplit) - 1]
                     endtl = '\n'.join(tlsplit)
-                    endtl = await message.channel.send("```" + "持ち越し" + tltime + "秒\n\n" + endtl + "```")
+                    if tltime != 90:
+                        endtl = await message.channel.send("```" + "持ち越し" + tltime + "秒\n\n" + endtl + "```")
+                    else:
+                        endtl = await message.channel.send("```" + endtl + "```")
 
                     await endtl.add_reaction("📩")
-                    
+
                 else:
                     sentmsg = await message.channel.send("エラー: 持ち越し時間")
-                    await message.delete(delay = 5)
+                    await message.delete(delay=5)
                     await sentmsg.delete(delay=5)
             except:
                 pass
 
-        
+
 
         elif str(message.content)[0:1] == "=":
             try:
@@ -136,8 +134,7 @@ async def on_message(message):
                                 ans += 1
 
                         if ans > 90:
-                           ans = 90
-
+                            ans = 90
 
                         if ans < 21:
                             await message.channel.send("持ち越し不可能です")
@@ -148,8 +145,7 @@ async def on_message(message):
                         spl = message.content[3:].split()
                         if int(spl[1][:2]) <= 90 and int(spl[1][:2]) > 20:
 
-                            ans = int(spl[0]) / (1 - (((int(spl[1][:2])- 0.99999999) - 20) / 90))
-
+                            ans = int(spl[0]) / (1 - (((int(spl[1][:2]) - 0.99999999) - 20) / 90))
 
                             if "." in str(ans):
                                 anssp = str(ans).split(".")
@@ -169,25 +165,26 @@ async def on_message(message):
             except:
                 pass
 
-        
+
 
         elif str(message.content)[0:6] == ";;help":
             try:
-                await message.channel.send("```tl <秒数> - TLを変換\n" + "= <計算式> - 計算\n" + "=スコア計算 - クラバトのスコアの計算(複数同時計算用)\n" + "=sc <段階> <ボス(整数)> <ダメージ> - スコア計算\n" + "=m <残りHP> <与ダメージ> - 持ち越し秒数の計算\n" + "=m <残りHP> <持ち越し時間>s - 指定した持ち越し時間に必要な最低ダメージを計算```")
-                
+                await message.channel.send(
+                    "```tl <秒数> - TLを変換\n" + "= <計算式> - 計算\n" + "=スコア計算 - クラバトのスコアの計算(複数同時計算用)\n" + "=sc <段階> <ボス(整数)> <ダメージ> - スコア計算\n" + "=m <残りHP> <与ダメージ> - 持ち越し秒数の計算\n" + "=m <残りHP> <持ち越し時間>s - 指定した持ち越し時間に必要な最低ダメージを計算```")
+
             except:
                 pass
-            
+
         elif str(message.content)[0:16] == "deploymentserver":
             try:
                 guildlist = ""
                 for item in bot.guilds:
-                    guildlist = str(guildlist) + str(item) + ", " 
+                    guildlist = str(guildlist) + str(item) + ", "
 
-                await message.channel.send("サーバー数: "+ str(len(bot.guilds))+ "\n" + "一覧: " + str(guildlist))
+                await message.channel.send("サーバー数: " + str(len(bot.guilds)) + "\n" + "一覧: " + str(guildlist))
             except:
                 pass
-            
+
         else:
             if int(message.author.id) in scoremathuser:
                 msg = message.content
@@ -200,31 +197,27 @@ async def on_message(message):
                 else:
                     spline = [msg]
                 amount = 0
-                
+
                 for line in spline:
                     item = line.split()
 
-                    
                     d = await scoremag(int(item[0]), int(item[1]))
-                    
 
                     score = d * int(item[2])
                     score = int(score)
-                    
+
                     score = '{:,}'.format(score)
 
                     scorelist.append(str(score))
 
                     amount += int(d * int(item[2]))
 
-                    
-
                 if len(scorelist) == 1:
                     scores = scorelist[0]
                     await message.channel.send(scores)
                 else:
                     scores = '\n'.join(scorelist)
-                    
+
                     await message.channel.send(scores + "\n\n" + "{:,}".format(amount))
 
                 looptime = 0
@@ -234,9 +227,9 @@ async def on_message(message):
                         break
 
                     looptime += 1
-                    
+
         logchannel = bot.get_channel(893860509902856202)
-        msg_id= 893860755785547836
+        msg_id = 893860755785547836
         datamsg = await logchannel.fetch_message(msg_id)
         data = str(datamsg.content).replace("[", "")
         data = data.replace("]", "")
@@ -271,13 +264,14 @@ async def on_message(message):
                     for item in message.attachments:
                         await sendchannel.send(item)
 
-        #await datamsg.edit(content="['707068450866069544 893873726477697035', '646245538022293512 893877531160219688']")
-        
+        # await datamsg.edit(content="['707068450866069544 893873726477697035', '646245538022293512 893877531160219688']")
+
     except:
         pass
 
+
 @bot.event
-async def on_reaction_add(reaction , user ):
+async def on_reaction_add(reaction, user):
     if user.bot:
         return
     if reaction.emoji == ("📩"):
@@ -286,9 +280,7 @@ async def on_reaction_add(reaction , user ):
             await channel.send(reaction.message.content)
 
 
-
-
-async def scoremag(a,b):
+async def scoremag(a, b):
     if int(a) == 1:
         if int(b) == 1:
             c = 1.2
@@ -340,12 +332,11 @@ async def scoremag(a,b):
     return c
 
 
-
-
 @bot.event
 async def on_ready():
     count = len(bot.guilds)
-    await bot.change_presence(activity = discord.Game(name=";;help", type=1))
+    await bot.change_presence(activity=discord.Game(name=";;help", type=1))
+
 
 token = getenv('DISCORD_BOT_TOKEN')
 bot.run(token)
