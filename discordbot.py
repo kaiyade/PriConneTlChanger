@@ -105,7 +105,7 @@ async def on_message(message):
             try:
                 if "スコア計算" in message.content:
                     spl = message.content.split()
-                    await message.channel.send("```<段階> <ボス(整数)> <ダメージ>```")
+                    await message.channel.send("```<段階> <ボス(整数)> <ダメージ>  - 改行して同じ様に書くことで複数同時計算が可能です。```")
                     if int(message.author.id) in scoremathuser:
                         pass
                     else:
